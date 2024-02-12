@@ -9,7 +9,7 @@ void main(void){
 	time_t			time;	
 	sockaddr_in		bind_addr, cli_addr;		
 	socklen_t		bind_addrlen = sizeof(bind_addr);	
-	socklen_t		cli_addrlen;
+	socklen_t		cli_addrlen = sizeof(cli_addr);
 	
 	serv_sock = CreateSocket(AF_INET, SOCK_DGRAM);
 	memset(&bind_addr, 0, sizeof(bind_addr));
