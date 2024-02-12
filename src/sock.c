@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include "../lib/sock.h"
 
 int CreateSocket(int family, int sock_type){
 	int sock_id;

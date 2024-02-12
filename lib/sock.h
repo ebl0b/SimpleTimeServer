@@ -2,6 +2,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <time.h>
 
 #ifndef SOCK
 #define SOCK
@@ -9,7 +10,7 @@
 #define SERV_IPV4		inet_addr("127.0.0.1")
 #define PORT			8080
 #define REQ_SIZE		1
-#define MES_SIZE		128
+#define RES_SIZE		sizeof(time_t)
 
 typedef struct sockaddr_in	sockaddr_in;
 typedef struct sockaddr_in	sockaddr;

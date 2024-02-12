@@ -1,26 +1,22 @@
 //Client
-#include "sock.h"
-#include "utils.h"
-#include "proc_req.h"
+#include "../lib/sock.h"
+#include "../lib/utils.h"
 #include <string.h>
 
-void main(void){
-	int				c_sock;
-	char			buffer[REQ_SIZE];
+int main(void){
+	int				cli_sock;
+	time_t			time;
 	const char		sig = '1';
-	char*			request = sig;
-	sockaddr_in		s_addr, c_addr;
-	socklen_t		s_addrlen = sizeof(s_addr);
-	socklen_t		c_addrlen = sizeof(c_addr);
+	sockaddr_in		serv_addr;
+	socklen_t		serv_addrlen = sizeof(serv_addr);
 
-	c_sock = CreateSocket(AF_INET, SOCK_DGRAM);
-	memset(&c_addr, 0, sizeof(c_addr));
-	memset(&s_addr, 0, sizeof(s_addr));
-	InitAddr(&s_addr, AF_INET, PORT, SERV_IPV4);
-	BindSocket(c_sock, c_addr, );	
+	cli_sock = CreateSocket(AF_INET, SOCK_DGRAM);
+	memset(&serv_addr, 0, sizeof(serv_addr));
+	InitAddr(&serv_addr, AF_INET, PORT, SERV_IPV4);	
 	
-	SendMes(request);
-	ReceiveMes(buffer);
-	PrintMes();
+	SendMes(cli_sock, &sig, REQ_SIZE, 0, &serv_addr, serv_addrlen);
+	ReceiveMes(cli_sock, &time, RES_SIZE, MSG_WAITALL, NULL, NULL);
+	PrintTime(time);
 
+	return 0;
 }

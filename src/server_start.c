@@ -1,26 +1,25 @@
 //Server
-#include "sock.h"
-#include "utils.h"
-#include "proc_req.h"
+#include "../lib/sock.h"
+#include "../lib/utils.h"
 #include <string.h>
 
 void main(void){
-	int				s_sock;			
-	char			buffer[REQ_SIZE];
-	char			response[RES_SIZE];	
-	sockaddr_in		s_addr, c_addr;		
-	socklen_t		s_addrlen = sizeof(s_addr);	
-	socklen_t		c_addrlen = sizeof(c_addr);
+	int				serv_sock;			
+	char			sig;
+	time_t			time;	
+	sockaddr_in		bind_addr, cli_addr;		
+	socklen_t		bind_addrlen = sizeof(serv_addr);	
+	socklen_t		cli_addrlen;
 	
 	s_sock = CreateSocket(AF_INET, SOCK_DGRAM);
-	memset(&s_addr, 0, sizeof(s_addr));
-	memset(&c_addr, 0, sizeof(c_addr));
-	InitAddr(&s_addr, AF_INET, PORT, INADDR_ANY);
-	BindSocket(s_sock, s_addr, s_addrlen);
+	memset(&bind_addr, 0, sizeof(serv_addr));
+	memset(&cli_addr, 0, sizeof(cli_addr));
+	InitAddr(&bind_addr, AF_INET, PORT, INADDR_ANY);
+	BindSocket(serv_sock, bind_addr, bind_addrlen);
 
 	for(;;){
-		ReceiveMes(s_sock, buffer, REQ_SIZE, MSG_WAITALL, &c_addr, c_addrlen);
-		GenerateRes(reponse);
-		SendMes(s_sock, response, RES_SIZE, 0, &c_addr, c_addrlen);
+		ReceiveMes(serv_sock, &sig, REQ_SIZE, MSG_WAITALL, &cli_addr, &cli_addrlen);
+		time = GetTime();
+		SendMes(serv_sock, &time, RES_SIZE, 0, &cli_addr, cli_addrlen);
 	}
 }
