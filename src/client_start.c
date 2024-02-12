@@ -6,7 +6,7 @@
 int main(void){
 	int				cli_sock;
 	time_t			time;
-	const char		sig = '1';
+	char			sig = '1';
 	sockaddr_in		serv_addr;
 	socklen_t		serv_addrlen = sizeof(serv_addr);
 

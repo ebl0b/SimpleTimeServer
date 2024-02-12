@@ -30,17 +30,17 @@ void BindSocket(int socket_id, sockaddr_in* addr, int addrlen){
 	}
 }
 
-int ReceiveMes(int sock_id, char* buffer, int buf_size, int flag, sockaddr_in* addr, int* addrlen){
+int ReceiveMes(int sock_id, void* buffer, int buf_size, int flag, sockaddr_in* addr, int* addrlen){
 	int n;
-	if ((n = recvfrom(socket_id, buffer, buf_size, flag, (sockaddr*)addr, addrlen)) == -1){
+	if ((n = recvfrom(sock_id, buffer, buf_size, flag, (sockaddr*)addr, addrlen)) == -1){
 		perror("Receive");
 		exit(EXIT_FAILURE);
 	}
 	return n;
 }
 
-void SendMes(int sock_id, char* buffer, int buf_size, int flag, sockaddr_in* addr, int* addrlen){
-if ((n = sendto(socket_id, buffer, buf_size, flag, (sockaddr*)addr, addrlen)) == -1){
+void SendMes(int sock_id, void* buffer, int buf_size, int flag, sockaddr_in* addr, int addrlen){
+if ((sendto(sock_id, buffer, buf_size, flag, (sockaddr*)addr, addrlen)) == -1){
 		perror("Send");
 		exit(EXIT_FAILURE);
 	}

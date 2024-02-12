@@ -7,4 +7,4 @@
 #endif
 
 unsigned	GetTime();
-void		PrintTime(int time);
+void		PrintTime(time_t time);

@@ -8,14 +8,14 @@ void main(void){
 	char			sig;
 	time_t			time;	
 	sockaddr_in		bind_addr, cli_addr;		
-	socklen_t		bind_addrlen = sizeof(serv_addr);	
+	socklen_t		bind_addrlen = sizeof(bind_addr);	
 	socklen_t		cli_addrlen;
 	
-	s_sock = CreateSocket(AF_INET, SOCK_DGRAM);
-	memset(&bind_addr, 0, sizeof(serv_addr));
+	serv_sock = CreateSocket(AF_INET, SOCK_DGRAM);
+	memset(&bind_addr, 0, sizeof(bind_addr));
 	memset(&cli_addr, 0, sizeof(cli_addr));
 	InitAddr(&bind_addr, AF_INET, PORT, INADDR_ANY);
-	BindSocket(serv_sock, bind_addr, bind_addrlen);
+	BindSocket(serv_sock, &bind_addr, bind_addrlen);
 
 	for(;;){
 		ReceiveMes(serv_sock, &sig, REQ_SIZE, MSG_WAITALL, &cli_addr, &cli_addrlen);
