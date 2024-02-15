@@ -4,11 +4,11 @@
 #include "../lib/utils.h"
 
 uint32_t GetTime(){
-	return (uint32_t)time(NULL) + (uint32_t)SEC_70;
+	return (uint32_t)time(NULL) + SEC_70;
 }
 
 void PrintTime(uint32_t time){
-	time -= (uint32_t)SEC_70;
+	time -= SEC_70;
 	time_t ttime = (time_t)time;
 	struct tm* loctime = localtime(&ttime);
 	char time_str[TIME_STR_SIZE];
