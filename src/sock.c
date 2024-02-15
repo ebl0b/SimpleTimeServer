@@ -44,4 +44,5 @@ if ((sendto(sock_id, buffer, buf_size, flag, (sockaddr*)addr, addrlen)) == -1){
 		perror("Send");
 		exit(EXIT_FAILURE);
 	}
+	perror("sent");
 }

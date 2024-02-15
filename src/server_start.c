@@ -5,8 +5,7 @@
 
 void main(void){
 	int				serv_sock;			
-	char			sig;
-	time_t			time;	
+	uint32_t		time;	
 	sockaddr_in		bind_addr, cli_addr;		
 	socklen_t		bind_addrlen = sizeof(bind_addr);	
 	socklen_t		cli_addrlen = sizeof(cli_addr);
@@ -18,8 +17,8 @@ void main(void){
 	BindSocket(serv_sock, &bind_addr, bind_addrlen);
 
 	for(;;){
-		ReceiveMes(serv_sock, &sig, REQ_SIZE, MSG_WAITALL, &cli_addr, &cli_addrlen);
-		time = GetTime();
+		ReceiveMes(serv_sock, NULL, 0, MSG_WAITALL, &cli_addr, &cli_addrlen);
+		time = htonl(GetTime());
 		SendMes(serv_sock, &time, RES_SIZE, 0, &cli_addr, cli_addrlen);
 	}
 }

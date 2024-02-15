@@ -3,14 +3,14 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <time.h>
+#include <stdint.h>
 
 #ifndef SOCK
 #define SOCK
 
 #define SERV_IPV4		inet_addr("127.0.0.1")
-#define PORT			8080
-#define REQ_SIZE		1
-#define RES_SIZE		sizeof(time_t)
+#define PORT			8037
+#define RES_SIZE		sizeof(uint32_t)
 
 typedef struct sockaddr_in	sockaddr_in;
 typedef struct sockaddr	sockaddr;
