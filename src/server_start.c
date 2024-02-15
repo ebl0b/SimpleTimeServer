@@ -2,8 +2,15 @@
 #include "../lib/sock.h"
 #include "../lib/utils.h"
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-void main(void){
+void main(int argc, char const *argv[]){
+	if(argc!=2){
+		puts("./serv <port>");
+		exit(EXIT_FAILURE);
+	}
+	int				port = atoi(argv[1]);
 	int				serv_sock;			
 	uint32_t		time;	
 	sockaddr_in		bind_addr, cli_addr;		
@@ -13,7 +20,7 @@ void main(void){
 	serv_sock = CreateSocket(AF_INET, SOCK_DGRAM);
 	memset(&bind_addr, 0, sizeof(bind_addr));
 	memset(&cli_addr, 0, sizeof(cli_addr));
-	InitAddr(&bind_addr, AF_INET, PORT, INADDR_ANY);
+	InitAddr(&bind_addr, AF_INET, port, INADDR_ANY);
 	BindSocket(serv_sock, &bind_addr, bind_addrlen);
 
 	for(;;){
